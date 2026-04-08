@@ -86,7 +86,8 @@
 			compatible = "mediatek,mt76";
 			reg = <0x0000 0 0 0 0>;
 			device_type = "pci";
-			mediatek,mtd-eeprom = <&eeprom_factory_0 0x0>;
+			nvmem-cells = <&eeprom_factory_0>;
+			nvmem-cell-names = "eeprom";
 		};
 	};
 };
@@ -301,10 +302,6 @@
 					phy-handle = <&internal_phy3>;
 				};
 
-				port@3 {
-					status = "disabled";
-				};
-
 				port@5 {
 					reg = <5>;
 					ethernet = <&gmac0>;
@@ -376,13 +373,11 @@
 	};
 
 	phy11: phy@11 {
-		compatible = "ethernet-phy-id03a2.a411";
+		compatible = "ethernet-phy-ieee802.3-c45";
 		reg = <11>;
 		reset-gpios = <&pio 48 GPIO_ACTIVE_LOW>;
 		reset-assert-us = <10000>;
 		reset-deassert-us = <10000>;
-		full-duplex;
-		pause;
 	};
 };
 
